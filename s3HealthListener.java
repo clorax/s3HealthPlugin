@@ -89,7 +89,7 @@ public class s3HealthListener extends PluginListener
 		
 		
 		//System.out.println(getDateTime() + " [INFO] Combat saving scheduled.");
-        System.out.println(getDateTime() + " [DEBUG] s3HealthPlugin - Listener PVP:" + pvp);
+		System.out.println(getDateTime() + " [DEBUG] s3HealthPlugin - Listener PVP:" + pvp);
 
 		
 	}

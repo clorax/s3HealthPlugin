@@ -55,43 +55,43 @@ public class s3HealthPlugin extends Plugin
 	
 	public void loadProperties()
     {
-        properties = new PropertiesFile("s3HealthPlugin.properties");
-        properties.load();
-        try {
-            pvp = properties.getBoolean("pvp", false);
-            dropinventory = properties.getBoolean("drop-inventory", true);
-            Combattimer = properties.getInt("combat-timer", 700);
-            woodensword = properties.getInt("wooden-sword", 6);
-            stonesword = properties.getInt("stone-sword", 7);
-            ironsword = properties.getInt("iron-sword", 8);
-            goldsword = properties.getInt("gold-sword", 10);
-            diamondsword = properties.getInt("diamond-sword", 20);
-            woodenspade = properties.getInt("wooden-spade", 4);
-            stonespade = properties.getInt("stone-spade", 5);
-            ironspade = properties.getInt("iron-spade", 6);
-            goldspade = properties.getInt("gold-spade", 8);
-            diamondspade = properties.getInt("diamond-spade", 10);
-            woodenpickaxe = properties.getInt("wooden-pickaxe", 4);
-            stonepickaxe = properties.getInt("stone-pickaxe", 5);
-            ironpickaxe = properties.getInt("iron-pickaxe", 6);
-            goldpickaxe = properties.getInt("gold-pickaxe", 8);
-            diamondpickaxe = properties.getInt("diamond-pickaxe", 10);
-            woodenaxe = properties.getInt("wooden-axe", 5);
-            stoneaxe = properties.getInt("stone-axe", 6);
-            ironaxe = properties.getInt("iron-axe", 7);
-            goldaxe = properties.getInt("gold-axe", 10);
-            diamondaxe = properties.getInt("diamond-axe", 18);
-            log.info(this.name + " " + this.version + " - Properties Loader: pvp=" +this.pvp);
+		properties = new PropertiesFile("s3HealthPlugin.properties");
+		properties.load();
+		try {
+			pvp = properties.getBoolean("pvp", false);
+			dropinventory = properties.getBoolean("drop-inventory", true);
+			Combattimer = properties.getInt("combat-timer", 700);
+			woodensword = properties.getInt("wooden-sword", 6);
+			stonesword = properties.getInt("stone-sword", 7);
+			ironsword = properties.getInt("iron-sword", 8);
+			goldsword = properties.getInt("gold-sword", 10);
+			diamondsword = properties.getInt("diamond-sword", 20);
+			woodenspade = properties.getInt("wooden-spade", 4);
+			stonespade = properties.getInt("stone-spade", 5);
+			ironspade = properties.getInt("iron-spade", 6);
+			goldspade = properties.getInt("gold-spade", 8);
+			diamondspade = properties.getInt("diamond-spade", 10);
+			woodenpickaxe = properties.getInt("wooden-pickaxe", 4);
+			stonepickaxe = properties.getInt("stone-pickaxe", 5);
+			ironpickaxe = properties.getInt("iron-pickaxe", 6);
+			goldpickaxe = properties.getInt("gold-pickaxe", 8);
+			diamondpickaxe = properties.getInt("diamond-pickaxe", 10);
+			woodenaxe = properties.getInt("wooden-axe", 5);
+			stoneaxe = properties.getInt("stone-axe", 6);
+			ironaxe = properties.getInt("iron-axe", 7);
+			goldaxe = properties.getInt("gold-axe", 10);
+			diamondaxe = properties.getInt("diamond-axe", 18);
+			log.info(this.name + " " + this.version + " - Properties Loader: pvp=" +this.pvp);
 			log.info(this.name + " " + this.version + " - Properties Loader: drop inventory=" + this.dropinventory);
 			log.info(this.name + " " + this.version + " - Properties Loader: combat timer=" + this.Combattimer);
 
-            
-        } catch (Exception e) {
-            
-        }
-        // TODO : non-existant file
-        //System.out.println(getDateTime() + " [DEBUG] s3HealthPlugin - Properties Loader: s3healthplugin.properties NOT FOUND!");
-    }
+		} catch (Exception e) {
+
+		}
+		// TODO : non-existant file
+		//System.out.println(getDateTime() + " [DEBUG] s3HealthPlugin - Properties Loader: s3healthplugin.properties NOT FOUND!");
+		
+	}
 
 	public void disable()
 	{
