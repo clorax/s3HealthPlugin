@@ -1,1 +1,21 @@
-Read me!!!!
+STILL TO DO:
+	* fix food so it works every time
+	* add food poisoning
+	* add falling damage
+	* add lava damage
+	* add drowning
+	* add suffocation by sand, gravel, foliage
+	* fix Creepers
+	* possibly more?
+
+CHANGELOG:
+
+version 1.15:
+	* Health is now 10 to start with
+	* Reduced player and mob damage
+	* Increased XP gain, XP is now based on mob type
+	* Level up every 2000XP
+	* Each level adds 1 to chance to hit, max health and max damage
+	* Simplified combat log, removed mob health
+	* Code cleanup
+	* Removed /enablecombatlog and /disablecombatlog	
