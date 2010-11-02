@@ -1,6 +1,3 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.io.IOException;
@@ -42,16 +39,9 @@ public class s3HealthPlugin extends Plugin
 	static final Logger log = Logger.getLogger("Minecraft");
 	static s3HealthListener listener;
 	
-	private String getDateTime()
-	{
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = new Date();
-		return dateFormat.format(date);
-	}
-	
 	public void enable()
 	{
-		
+		log.info(this.name + " " + this.version + " enabled");
 		etc.getInstance().addCommand("/health", "- Shows your current health.");
 		etc.getInstance().addCommand("/hp", "- Shows your current health.");
 		etc.getInstance().addCommand("/pvpenable", "- Enable PVP");
@@ -61,7 +51,7 @@ public class s3HealthPlugin extends Plugin
 		etc.getInstance().addCommand("/disablecombatlog", "- Disables your combat log");
 		loadProperties();
 		listener = new s3HealthListener();
-		System.out.println(getDateTime() + " [INFO] s3HealthPlugin " + this.version + " enabled");    
+		log.info(this.name + " " + this.version + " loaded");
 	}
 	
 	public void loadProperties()
@@ -92,9 +82,10 @@ public class s3HealthPlugin extends Plugin
             ironaxe = properties.getInt("iron-axe", 7);
             goldaxe = properties.getInt("gold-axe", 10);
             diamondaxe = properties.getInt("diamond-axe", 18);
-            System.out.println(getDateTime() + " [DEBUG] s3HealthPlugin - Properties Loader: pvp=" + this.pvp);
-            System.out.println(getDateTime() + " [DEBUG] s3HealthPlugin - Properties Loader: drop inventory=" + this.dropinventory);
-            System.out.println(getDateTime() + " [DEBUG] s3HealthPlugin - Properties Loader: combat timer=" + this.Combattimer);
+            log.info(this.name + " " + this.version + " - Properties Loader: pvp=" +this.pvp);
+			log.info(this.name + " " + this.version + " - Properties Loader: drop inventory=" + this.dropinventory);
+			log.info(this.name + " " + this.version + " - Properties Loader: combat timer=" + this.Combattimer);
+
             
         } catch (Exception e) {
             
@@ -111,8 +102,7 @@ public class s3HealthPlugin extends Plugin
 		etc.getInstance().removeCommand("/heal");
 		etc.getInstance().removeCommand("/enablecombatlog");
 		etc.getInstance().removeCommand("/disablecombatlog");
-		
-		System.out.println(getDateTime() + " [INFO] s3HealthPlugin " + this.version + " disabled");
+		log.info(this.name + " " + this.version + " disabled");
 	}
 
 	public void initialize() 
@@ -122,9 +112,5 @@ public class s3HealthPlugin extends Plugin
 		etc.getLoader().addListener(PluginLoader.Hook.COMMAND, listener, this, PluginListener.Priority.MEDIUM);
 		etc.getLoader().addListener(PluginLoader.Hook.BLOCK_CREATED, listener, this, PluginListener.Priority.MEDIUM);
 		etc.getLoader().addListener(PluginLoader.Hook.DISCONNECT, listener, this, PluginListener.Priority.MEDIUM);
-		
 	}
-
-
-
 }
