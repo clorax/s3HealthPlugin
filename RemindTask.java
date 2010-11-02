@@ -34,7 +34,7 @@ class RemindTask extends TimerTask
 				} else {
 					if (parent.getCombatLog(p) == 1)
 					{
-						p.sendMessage("§cYou were hit by " + m.getName() + " HP: (" + m.getHealth() + ") for " + thisdmg + " damage! (CurrHP: " + parent.getPlayerHP(p) + ")");
+						p.sendMessage("Â§cYou were hit by " + m.getName() + " HP: (" + m.getHealth() + ") for " + thisdmg + " damage! (CurrHP: " + parent.getPlayerHP(p) + ")");
 					} else {
 						// supress the combat log
 					}
@@ -51,7 +51,7 @@ class RemindTask extends TimerTask
 					
 					if (parent.getCombatLog(p) == 1)
 					{
-						p.sendMessage("§cYou were hit by " + m.getName() + " HP(" + m.getHealth() + ") for " + thisdmg + " damage! (CurrHP: " + parent.getPlayerHP(p) + ")");
+						p.sendMessage("Â§cYou were hit by " + m.getName() + " HP(" + m.getHealth() + ") for " + thisdmg + " damage! (CurrHP: " + parent.getPlayerHP(p) + ")");
 					} else {
 						// supress the combat log
 					}
