@@ -32,35 +32,35 @@ public class s3HealthListener extends PluginListener
 		}
 	}
 
-    boolean pvp = s3HealthPlugin.pvp;
-    boolean dropinventory = s3HealthPlugin.dropinventory;
-    int Combattimer = s3HealthPlugin.Combattimer;
+	boolean pvp = s3HealthPlugin.pvp;
+	boolean dropinventory = s3HealthPlugin.dropinventory;
+	int Combattimer = s3HealthPlugin.Combattimer;
     
-    int woodensword = s3HealthPlugin.woodensword;
-    int stonesword = s3HealthPlugin.stonesword;
-    int ironsword = s3HealthPlugin.ironsword;
-    int goldsword = s3HealthPlugin.goldsword;
-    int diamondsword =s3HealthPlugin.diamondsword;
+	int woodensword = s3HealthPlugin.woodensword;
+	int stonesword = s3HealthPlugin.stonesword;
+	int ironsword = s3HealthPlugin.ironsword;
+	int goldsword = s3HealthPlugin.goldsword;
+	int diamondsword =s3HealthPlugin.diamondsword;
+
+	int woodenspade = s3HealthPlugin.woodenspade;
+	int stonespade = s3HealthPlugin.stonespade;
+	int ironspade = s3HealthPlugin.ironspade;
+	int goldspade = s3HealthPlugin.goldspade;
+	int diamondspade = s3HealthPlugin.diamondspade;
     
-    int woodenspade = s3HealthPlugin.woodenspade;
-    int stonespade = s3HealthPlugin.stonespade;
-    int ironspade = s3HealthPlugin.ironspade;
-    int goldspade = s3HealthPlugin.goldspade;
-    int diamondspade = s3HealthPlugin.diamondspade;
+	int woodenpickaxe = s3HealthPlugin.woodenpickaxe;
+	int stonepickaxe = s3HealthPlugin.stonepickaxe;
+	int ironpickaxe = s3HealthPlugin.ironpickaxe;
+	int goldpickaxe = s3HealthPlugin.goldpickaxe;
+	int diamondpickaxe = s3HealthPlugin.diamondpickaxe;
     
-    int woodenpickaxe = s3HealthPlugin.woodenpickaxe;
-    int stonepickaxe = s3HealthPlugin.stonepickaxe;
-    int ironpickaxe = s3HealthPlugin.ironpickaxe;
-    int goldpickaxe = s3HealthPlugin.goldpickaxe;
-    int diamondpickaxe = s3HealthPlugin.diamondpickaxe;
-    
-    int woodenaxe = s3HealthPlugin.woodenaxe;
-    int stoneaxe = s3HealthPlugin.stoneaxe;
-    int ironaxe = s3HealthPlugin.ironaxe;
-    int goldaxe = s3HealthPlugin.goldaxe;
-    int diamondaxe = s3HealthPlugin.diamondaxe;
-    
-    int basedamage = s3HealthPlugin.basedamage;
+	int woodenaxe = s3HealthPlugin.woodenaxe;
+	int stoneaxe = s3HealthPlugin.stoneaxe;
+	int ironaxe = s3HealthPlugin.ironaxe;
+	int goldaxe = s3HealthPlugin.goldaxe;
+	int diamondaxe = s3HealthPlugin.diamondaxe;
+
+	int basedamage = s3HealthPlugin.basedamage;
     
 	public Timer timer;
 	public Timer saveTimer;
@@ -95,44 +95,44 @@ public class s3HealthListener extends PluginListener
 	}
 	
 	public boolean onBlockCreate(Player player, Block BlockPlaced, Block blockClicked, int itemInHand)
-    {
-        if (player.getItemInHand() == 319)
-        {
-            setPlayerHP(player, getPlayerHP(player) + 2);
+	{
+		if (player.getItemInHand() == 319)
+		{
+			setPlayerHP(player, getPlayerHP(player) + 2);
 			player.sendMessage("HP:" + getPlayerHP(player));
 		} else {
-            if (player.getItemInHand() == 320)
-            {
-                setPlayerHP(player, getPlayerHP(player) + 4);
+			if (player.getItemInHand() == 320)
+			{
+				setPlayerHP(player, getPlayerHP(player) + 4);
 				player.sendMessage("HP:" + getPlayerHP(player));
-            } else {
-                if (player.getItemInHand() == 297)
-                {
-                    setPlayerHP(player, getPlayerHP(player) + 3);
+			} else {
+				if (player.getItemInHand() == 297)
+				{
+					setPlayerHP(player, getPlayerHP(player) + 3);
 					player.sendMessage("HP:" + getPlayerHP(player));
-                } else {
-                    if (player.getItemInHand() == 260)
-                    {
-                        setPlayerHP(player, getPlayerHP(player) + 2);
+				} else {
+					if (player.getItemInHand() == 260)
+					{
+						setPlayerHP(player, getPlayerHP(player) + 2);
 						player.sendMessage("HP:" + getPlayerHP(player));
-                    } else {
-                        if (player.getItemInHand() == 282)
-                        {
-                            setPlayerHP(player, getPlayerHP(player) + 6);
+					} else {
+						if (player.getItemInHand() == 282)
+						{
+							setPlayerHP(player, getPlayerHP(player) + 6);
 							player.sendMessage("HP:" + getPlayerHP(player));
-                        } else {
-                            if (player.getItemInHand() == 322)
-                            {
-                                setPlayerHP(player, getPlayerHP(player) + 12);
+						} else {
+							if (player.getItemInHand() == 322)
+							{
+								setPlayerHP(player, getPlayerHP(player) + 12);
 								player.sendMessage("HP:" + getPlayerHP(player));
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }  
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}  
 	
 	public void loadPlayerList()
 	{
@@ -407,12 +407,14 @@ public class s3HealthListener extends PluginListener
 
 		return false;
 	}
+	
 	public void onDisconnect(Player player)
 	{
 		packPlayers();
 		System.out.println(getDateTime() + " [DEBUG] Disconnect Save DATA");
 
 	}
+
 	public void onLogin(Player player)
 	{
 		// check if the player exists
@@ -558,116 +560,116 @@ public class s3HealthListener extends PluginListener
 	}
 
 	public int getItemDamage(int itemId)
-	  {
-	      // in case there is no item found, use the base damage for a 'fashioned weapon' (ie brick etc) (3)
-	      int itembasedamage = basedamage;
-	           // WOODEN ITEMS
-	         if (itemId == 268)
-	         {
-	             // Wooden Sword
-	             itembasedamage = woodensword;
-	         }
-	         if (itemId == 269)
-	         {
-	             // Wooden Spade
-	             itembasedamage = woodenspade;
-	         }
-	         if (itemId == 270)
-	         {
-	             // Wooden Pickaxe
-	             itembasedamage = woodenpickaxe;
-	         }
-	         if (itemId == 271)
-	         {
-	             // Wooden Axe
-	             itembasedamage = woodenaxe;
-	         }
-	         // STONE ITEMS
-	         if (itemId == 272)
-	         {
-	             // Stone Sword
-	             itembasedamage = stonesword;
-	         }
-	         if (itemId == 273)
-	         {
-	             // Stone Spade
-	             itembasedamage = stonespade;
-	         }
-	         if (itemId == 274)
-	         {
-	             // Stone Pickaxe
-	             itembasedamage = stonepickaxe;
-	         }
-	         if (itemId == 275)
-	         {
-	             // Stone Axe
-	             itembasedamage = stoneaxe;
-	         }
-	         // DIAMOND ITEMS
-	         if (itemId == 276)
-	         {
-	             // Diamond Sword
-	             itembasedamage = diamondsword;
-	         }
-	         if (itemId == 277)
-	         {
-	             // Diamond Spade
-	             itembasedamage = diamondspade;
-	         }
-	         if (itemId == 278)
-	         {
-	             // Diamond Pickaxe
-	             itembasedamage = diamondpickaxe;
-	         }
-	         if (itemId == 279)
-	         {
-	             // Diamond Axe
-	             itembasedamage = diamondaxe;
-	         }
-	         // IRON ITEMS
-	         if (itemId == 267)
-	         {
-	             // Iron Sword
-	             itembasedamage = ironsword;
-	         }
-	         if (itemId == 256)
-	         {
-	             // Iron Spade
-	             itembasedamage = ironspade;
-	         }
-	         if (itemId == 257)
-	         {
-	             // Iron Pickaxe
-	             itembasedamage = ironpickaxe;
-	         }
-	         if (itemId == 258)
-	         {
-	             // Iron Axe
-	             itembasedamage = ironaxe;
-	         }
-	         // GOLD ITEMS
-	         if (itemId == 283)
-	         {
-	             // Gold Sword
-	             itembasedamage = goldsword;
-	         }
-	         if (itemId == 284)
-	         {
-	             // Gold Spade
-	             itembasedamage = goldspade;
-	         }
-	         if (itemId == 285)
-	         {
-	             // Gold Pickaxe
-	             itembasedamage = goldpickaxe;
-	         }
-	         if (itemId == 286)
-	         {
-	             // Gold Axe
-	             itembasedamage = goldaxe;
-	         }
-	         return itembasedamage;
-	  }
+	{
+		// in case there is no item found, use the base damage for a 'fashioned weapon' (ie brick etc) (3)
+		int itembasedamage = basedamage;
+		// WOODEN ITEMS
+		if (itemId == 268)
+		{
+			// Wooden Sword
+			itembasedamage = woodensword;
+		}
+		if (itemId == 269)
+		{
+			// Wooden Spade
+			itembasedamage = woodenspade;
+		}
+		if (itemId == 270)
+		{
+			// Wooden Pickaxe
+			itembasedamage = woodenpickaxe;
+		}
+		if (itemId == 271)
+		{
+			// Wooden Axe
+			itembasedamage = woodenaxe;
+		}
+		// STONE ITEMS
+		if (itemId == 272)
+		{
+			// Stone Sword
+			itembasedamage = stonesword;
+		}
+		if (itemId == 273)
+		{
+			// Stone Spade
+			itembasedamage = stonespade;
+		}
+		if (itemId == 274)
+		{
+			// Stone Pickaxe
+			itembasedamage = stonepickaxe;
+		}
+		if (itemId == 275)
+		{
+			// Stone Axe
+			itembasedamage = stoneaxe;
+		}
+		// DIAMOND ITEMS
+		if (itemId == 276)
+		{
+			// Diamond Sword
+			itembasedamage = diamondsword;
+		}
+		if (itemId == 277)
+		{
+			// Diamond Spade
+			itembasedamage = diamondspade;
+		}
+		if (itemId == 278)
+		{
+			// Diamond Pickaxe
+			itembasedamage = diamondpickaxe;
+		}
+		if (itemId == 279)
+		{
+			// Diamond Axe
+			itembasedamage = diamondaxe;
+		}
+		// IRON ITEMS
+		if (itemId == 267)
+		{
+			// Iron Sword
+			itembasedamage = ironsword;
+		}
+		if (itemId == 256)
+		{
+			// Iron Spade
+			itembasedamage = ironspade;
+		}
+		if (itemId == 257)
+		{
+			// Iron Pickaxe
+			itembasedamage = ironpickaxe;
+		}
+		if (itemId == 258)
+		{
+			// Iron Axe
+			itembasedamage = ironaxe;
+		}
+		// GOLD ITEMS
+		if (itemId == 283)
+		{
+			// Gold Sword
+			itembasedamage = goldsword;
+		}
+		if (itemId == 284)
+		{
+			// Gold Spade
+			itembasedamage = goldspade;
+		}
+		if (itemId == 285)
+		{
+			// Gold Pickaxe
+			itembasedamage = goldpickaxe;
+		}
+		if (itemId == 286)
+		{
+			// Gold Axe
+			itembasedamage = goldaxe;
+		}
+		return itembasedamage;
+	}
 
 	public int getPlayerDamage(Player player)
 	{
@@ -809,5 +811,4 @@ public class s3HealthListener extends PluginListener
 			}
 		}
 	}
-
 }

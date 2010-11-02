@@ -8,31 +8,30 @@ public class s3HealthPlugin extends Plugin
 	private String version = "1.14";
 	
 	
-	 static boolean pvp = false;
-	 static boolean dropinventory = true;
-	    
-	 static int Combattimer = 700;
-	 static int woodensword = 6;
-	 static int stonesword = 7;
-	 static int ironsword = 8;
-	 static int goldsword = 10;
-	 static int diamondsword = 20;
-	 static int woodenspade = 4;
-	 static int stonespade = 5;
-	 static int ironspade = 6;
-	 static int goldspade = 8;
-	 static int diamondspade = 10;
-	 static int woodenpickaxe = 4;
-	 static int stonepickaxe = 5;
-	 static int ironpickaxe = 6;
-	 static int goldpickaxe = 8;
-	 static int diamondpickaxe = 10;
-	 static int woodenaxe = 5;
-	 static int stoneaxe = 6;
-	 static int ironaxe = 7;
-	 static int goldaxe = 10;
-	 static int diamondaxe = 18;
-	 static int basedamage = 3;
+	static boolean pvp = false;
+	static boolean dropinventory = true;
+	static int Combattimer = 700;
+	static int woodensword = 6;
+	static int stonesword = 7;
+	static int ironsword = 8;
+	static int goldsword = 10;
+	static int diamondsword = 20;
+	static int woodenspade = 4;
+	static int stonespade = 5;
+	static int ironspade = 6;
+	static int goldspade = 8;
+	static int diamondspade = 10;
+	static int woodenpickaxe = 4;
+	static int stonepickaxe = 5;
+	static int ironpickaxe = 6;
+	static int goldpickaxe = 8;
+	static int diamondpickaxe = 10;
+	static int woodenaxe = 5;
+	static int stoneaxe = 6;
+	static int ironaxe = 7;
+	static int goldaxe = 10;
+	static int diamondaxe = 18;
+	static int basedamage = 3;
 	
 	private PropertiesFile properties = new PropertiesFile("s3HealthPlugin.properties");
 	    

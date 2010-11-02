@@ -58,8 +58,6 @@ class RemindTask extends TimerTask
 				}
 			}
 
-
-
 		}
 	}
 
@@ -114,5 +112,4 @@ class RemindTask extends TimerTask
 		double zPart = Math.pow(a.getZ() - b.getZ(), 2.0D);
 		return Math.sqrt(xPart + yPart + zPart);
 	}
-
 }
