@@ -19,9 +19,9 @@ public class s3HealthListener extends PluginListener
 		public String name;
 		public int hp;
 		public int exp = 0;
-		public int melee = 0;
+		public int melee = 1;
 		// Combat Log on by default
-		public int combatlog = 1;
+		//public int combatlog = 1;
 
 
 		public p1(String name, int hp)
@@ -61,7 +61,8 @@ public class s3HealthListener extends PluginListener
 	int diamondaxe = s3HealthPlugin.diamondaxe;
 
 	int basedamage = s3HealthPlugin.basedamage;
-    
+	int maxhealth = s3HealthPlugin.maxhealth;
+	 
 	public Timer timer;
 	public Timer saveTimer;
 	
@@ -118,12 +119,12 @@ public class s3HealthListener extends PluginListener
 					} else {
 						if (player.getItemInHand() == 282)
 						{
-							setPlayerHP(player, getPlayerHP(player) + 6);
+							setPlayerHP(player, getPlayerHP(player) + 5);
 							player.sendMessage("HP:" + getPlayerHP(player));
 						} else {
 							if (player.getItemInHand() == 322)
 							{
-								setPlayerHP(player, getPlayerHP(player) + 12);
+								setPlayerHP(player, getPlayerHP(player) + 10);
 								player.sendMessage("HP:" + getPlayerHP(player));
 							}
 						}
@@ -218,6 +219,8 @@ public class s3HealthListener extends PluginListener
 		configProperties.setInt("iron-axe", ironaxe);
 		configProperties.setInt("gold-axe", goldaxe);
 		configProperties.setInt("diamond-axe", diamondaxe);
+		configProperties.setInt("basedamage", basedamage);
+		configProperties.setInt("maxhealth", maxhealth);	
 	}
 	
 	public void packPlayers()
@@ -273,7 +276,12 @@ public class s3HealthListener extends PluginListener
 		for (int i = 0; i < this.playerList.size(); i++) {
 			if (this.playerList.get(i).name.equals(player.getName()) == true)
 			{
-				this.playerList.get(i).hp = newhp;
+				if (newhp <= (maxhealth + this.playerList.get(i).melee))
+				{
+					this.playerList.get(i).hp = newhp;
+				} else {
+					this.playerList.get(i).hp = (maxhealth + this.playerList.get(i).melee);
+				}
 
 			}
 		}
@@ -288,69 +296,6 @@ public class s3HealthListener extends PluginListener
 			}
 		}
 		return 0;
-	}
-
-	public void DoPanic(Mob m, Player p, int basedamage)
-	{
-		double dist = getDistance(p, m);
-		if (dist <= 2.0D)
-		{
-			p.sendMessage("Distance check:" + dist);
-			Random generator = new Random();
-			int index = generator.nextInt(basedamage);
-			int thisdmg = index;
-
-			if (getCombatLog(p) == 1)
-			{
-				p.sendMessage("The " + m.getName() + " hit you back! For " + thisdmg + " damage! (CurrHP: " + p.getHealth() + ")");				
-			} else {
-				// Suppress the combat message, they've disabled it
-			}
-			if (p.getHealth() < thisdmg)
-			{
-				p.sendMessage("You have been slain!");
-
-				p.teleportTo(etc.getServer().getSpawnLocation());
-			}
-			else {
-				p.setHealth(p.getHealth() - thisdmg);
-			}
-		}
-	}
-	
-	public void setCombatLog(Player player, int value)
-	{
-		for (int i = 0; i < this.playerList.size(); i++) {
-			if (this.playerList.get(i).name.equals(player.getName()) == true)
-			{
-				this.playerList.get(i).combatlog = value;
-			}
-		}
-	}
-	
-	public int getCombatLog(Player player)
-	{
-		for (int i = 0; i < this.playerList.size(); i++) {
-			if (this.playerList.get(i).name.equals(player.getName()) == true)
-			{
-				return this.playerList.get(i).combatlog;
-			}
-		}
-		return -1;
-	}
-	
-	// stops/starts combat spam
-	public void enableCombatLog(Player player)
-	{
-		player.sendMessage("Combat Log Enabled - to disable /disablecombatlog");
-		setCombatLog(player,1);
-		
-	}
-	
-	public void disableCombatLog(Player player)
-	{
-		player.sendMessage("Combat Log Disabled - to enable /enablecombatlog");			
-		setCombatLog(player,0);
 	}
 
 
@@ -370,20 +315,6 @@ public class s3HealthListener extends PluginListener
 
 
 		
-		if(split[0].equalsIgnoreCase("/enablecombatlog") && player.canUseCommand("/enablecombatlog"))
-		{
-			// Enable combat log for the player
-			enableCombatLog(player);
-			return true;
-		}
-		if(split[0].equalsIgnoreCase("/disablecombatlog") && player.canUseCommand("/disablecombatlog"))
-		{
-			// Enable combat log for the player
-			disableCombatLog(player);
-			return true;
-		}
-
-
 		if(split[0].equalsIgnoreCase("/pvpenable") && player.canUseCommand("/pvpenable"))
         {
           pvp = true; // false = Disabled, true = Enabled
@@ -429,7 +360,7 @@ public class s3HealthListener extends PluginListener
 
 		if (exists == 0)
 		{
-			p1 play = new p1(player.getName(),100);
+			p1 play = new p1(player.getName(),10);
 
 			this.playerList.add(play);
 			player.sendMessage("Welcome, you have been registered by the hp system! HP:" + getPlayerHP(player));
@@ -446,14 +377,15 @@ public class s3HealthListener extends PluginListener
 				playerfound = 1;
 				this.playerList.get(i).exp = this.playerList.get(i).exp + amount;
 				player.sendMessage("You gain experience (" + this.playerList.get(i).exp + ")!");
-				Random generator = new Random();
-				int index = generator.nextInt(100);
+				//Random generator = new Random();
+				//int index = generator.nextInt(100);
 				// 1 in a hundred chance of skillup
-				if (index == 1)
+				if (this.playerList.get(i).exp >= (this.playerList.get(i).melee * 2000))
 				{
 					this.playerList.get(i).melee = this.playerList.get(i).melee + 1;
-					player.sendMessage("You get better at melee! (" + this.playerList.get(i).melee + ")!");
-
+					player.sendMessage("You have gained a level! (" + this.playerList.get(i).melee + ")!");
+					setPlayerHP(player,100);
+					player.sendMessage("HP: " + getPlayerHP(player));
 				}
 
 			}
@@ -702,7 +634,7 @@ public class s3HealthListener extends PluginListener
 					if (pvp == true)
 					{
 						double dist = getPlayerDistance(player, p);
-						if (dist <= 2.0D)
+						if (dist <= 2.5D)
 						{
 							if (PlayerHasHit(player) == 0)
 							{ 
@@ -711,24 +643,14 @@ public class s3HealthListener extends PluginListener
 								{
 									// do nothing they are already dead
 								} else {
-									if (getCombatLog(player) == 1)
-									{
-										player.sendMessage("You try to strike a " + p.getName() + " HP: (" + getPlayerHP(p) + ") but miss! Your HP: " + getPlayerHP(player));
-									} else {
-										// suppress the combat log
-									}
+									player.sendMessage("You try to strike " + p.getName() + " but miss! (HP: " + getPlayerHP(player) + ")");
 								}
 							} else {
 								// hit
 								// Get player damage
 								int thisdmg = getPlayerDamage(player);
 
-								if (getCombatLog(player) == 1)
-								{
-									player.sendMessage("You strike " + p.getName() + " for " + thisdmg + " damage. Your HP: " + getPlayerHP(player) + " Their HP: " + getPlayerHP(p));
-								} else {
-									// Supress the combat log
-								}
+								player.sendMessage("You strike " + p.getName() + " for " + thisdmg + " damage. (HP: " + getPlayerHP(player) + ")");
 								if (getPlayerHP(p) < thisdmg)
 								{
 									player.sendMessage("You have slain " + p.getName() + "!");
@@ -737,12 +659,7 @@ public class s3HealthListener extends PluginListener
 									DoPlayerDeath(p);
 								} else {
 									setPlayerHP(p,getPlayerHP(p) - thisdmg);
-									if (getCombatLog(p) == 1)
-									{
-										p.sendMessage("You have been hit by " + player.getName() + " for " + thisdmg + " damage. Your HP: " + getPlayerHP(p) + " Their HP: " + getPlayerHP(player));
-									} else {
-										// Supress the combat log
-									}
+									p.sendMessage("You have been hit by " + player.getName() + " for " + thisdmg + " damage. (HP: " + getPlayerHP(p) + ")");
 								}
 							}
 						} else {
@@ -759,7 +676,7 @@ public class s3HealthListener extends PluginListener
 			if (m != null) {
 				double dist = getDistance(player, m);
 
-				if (dist < 2.0D)
+				if (dist < 2.5D)
 				{
 					if (PlayerHasHit(player) == 0)
 					{
@@ -770,12 +687,7 @@ public class s3HealthListener extends PluginListener
 						} else {
 
 							// tell them they missed
-							if (getCombatLog(player) == 1)
-							{
-								player.sendMessage("You try to strike a " + m.getName() + " HP: (" + m.getHealth() + ") but miss! Your HP: " + getPlayerHP(player));
-							} else {
-								// supress the combat log
-							}
+							player.sendMessage("You try to strike a " + m.getName() + " but miss! (HP: " + getPlayerHP(player) + ")");
 						}
 					} else {
 						// Hit
@@ -788,20 +700,34 @@ public class s3HealthListener extends PluginListener
 							// Get player damage
 							int thisdmg = getPlayerDamage(player);
 							
-							if (getCombatLog(player) == 1)
-							{
-								player.sendMessage("You strike " + m.getName() + " HP: (" + m.getHealth() + ") for " + thisdmg + " damage. Your HP: " + getPlayerHP(player));
-							} else {
-								
-							}
+							player.sendMessage("You strike a " + m.getName() + " for " + thisdmg + " damage. (HP: " + getPlayerHP(player) + ")");
 							if (m.getHealth() <= thisdmg)
 							{
 								player.sendMessage("You have slain a " + m.getName() + "!");
+								//m.setHealth(0);
+								
+								if (m.getName().equals("Zombie") == true)
+								{
+									GiveExperience(player,80);
+								} else {
+									if (m.getName().equals("Skeleton") == true)
+									{
+										GiveExperience(player,100);
+									} else {
+										if (m.getName().equals("Creeper") == true)
+										{
+											GiveExperience(player,200);
+										} else {
+											if (m.getName().equals("Spider") == true)
+											{
+												GiveExperience(player,50);
+											}
+										}
+									}
+								}
 								m.setHealth(0);
-								GiveExperience(player,1);
 							} else {
 								m.setHealth(m.getHealth() - thisdmg);
-								//DoPanic(m, player, 5);
 							}
 						}
 					}

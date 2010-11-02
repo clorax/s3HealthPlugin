@@ -15,28 +15,23 @@ class RemindTask extends TimerTask
 		this.parent = parent;
 	}
 
-	public void DoMobCombat(Mob m, Player p, int basedamage)
+	public void DoMobCombat(Mob m, Player p, int basedamage, double mindistance)
 	{
 		double dist = getDistance(p, m);
 		int playerentry = 0;
-		if (dist <= 2.0D)
+		if (dist <= mindistance)
 		{
 			Random generator = new Random();
 			int index = generator.nextInt(basedamage);
 			int thisdmg = index;
-
-			if ((parent.getPlayerHP(p) - thisdmg) < 1)
+			int thishp = parent.getPlayerHP(p) - thisdmg;
+			if (thishp < 1)
 			{
 				if (m.getHealth() == 0)
 				{
 					// do nothing
 				} else {
-					if (parent.getCombatLog(p) == 1)
-					{
-						p.sendMessage("You were hit by " + m.getName() + " HP: (" + m.getHealth() + ") for " + thisdmg + " damage! (CurrHP: " + parent.getPlayerHP(p) + ")");
-					} else {
-						// supress the combat log
-					}
+					p.sendMessage("You were hit by a " + m.getName() + " for " + thisdmg + " damage! (HP: 0)");
 	
 					// reset hp and warp to spawn
 					parent.DoPlayerDeath(p);
@@ -46,14 +41,9 @@ class RemindTask extends TimerTask
 				{
 					// do nothing
 				} else {
-					parent.setPlayerHP(p, parent.getPlayerHP(p) - thisdmg);
+					parent.setPlayerHP(p, thishp);
 					
-					if (parent.getCombatLog(p) == 1)
-					{
-						p.sendMessage("You were hit by " + m.getName() + " HP(" + m.getHealth() + ") for " + thisdmg + " damage! (CurrHP: " + parent.getPlayerHP(p) + ")");
-					} else {
-						// supress the combat log
-					}
+					p.sendMessage("You were hit by a " + m.getName() + " for " + thisdmg + " damage! (HP: " + thishp + ")");
 				}
 			}
 
@@ -68,32 +58,32 @@ class RemindTask extends TimerTask
 			for (Mob m : etc.getServer().getMobList()) {
 				if (m == null)
 					continue;
-				
+
 				if (m.getName().equals("Spider") == true)
 				{
 					for (Player p : etc.getServer().getPlayerList()) {
-						DoMobCombat(m, p, 8);
+						DoMobCombat(m, p, 2, 2.5D);
 					}
 				}
 	
 				if (m.getName().equals("Zombie") == true)
 				{
 					for (Player p : etc.getServer().getPlayerList()) {
-						DoMobCombat(m, p, 4);
+						DoMobCombat(m, p, 4, 2.5D);
 					}
 				}
 
 				if (m.getName().equals("Creeper") == true)
 				{
 					for (Player p : etc.getServer().getPlayerList()) {
-						DoMobCombat(m, p, 2);
+						DoMobCombat(m, p, 10, 1.5D);
 					}
 				}
 				
 				if (m.getName().equals("Skeleton") == true)
 				{
 					for (Player p : etc.getServer().getPlayerList()) {
-						DoMobCombat(m, p, 5);
+						DoMobCombat(m, p, 3, 2.5D);
 					}
 				}
 			}
