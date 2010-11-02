@@ -2,13 +2,16 @@ STILL TO DO:
 	* fix food so it works every time
 	* add food poisoning
 	* add falling damage
-	* add lava damage
+	* make lava damage recurrent for 15 seconds or until water is applied
 	* add drowning
 	* add suffocation by sand, gravel, foliage
 	* fix Creepers
 	* possibly more?
 
 CHANGELOG:
+
+version 1.16:
+	* Added lava damage (sort of)
 
 version 1.15:
 	* Health is now 10 to start with
@@ -18,4 +21,4 @@ version 1.15:
 	* Each level adds 1 to chance to hit, max health and max damage
 	* Simplified combat log, removed mob health
 	* Code cleanup
-	* Removed /enablecombatlog and /disablecombatlog	
+	* Removed /enablecombatlog and /disablecombatlog

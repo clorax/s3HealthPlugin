@@ -55,6 +55,22 @@ class RemindTask extends TimerTask
 	{
 
 		try {
+
+			for (Player p : etc.getServer().getPlayerList()) {
+				Location l = p.getLocation();
+				int id = etc.getServer().getBlockIdAt((int)l.x, (int)l.y, (int)(l.z)-1);
+				if (id == 10 || id == 11)
+				{
+					if (parent.getPlayerHP(p) > 2)
+					{
+						parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 2));
+						p.sendMessage("The lava burns you! (HP: " + parent.getPlayerHP(p));
+					} else {
+						parent.DoPlayerDeath(p);
+					}
+				}
+			}
+
 			for (Mob m : etc.getServer().getMobList()) {
 				if (m == null)
 					continue;

@@ -5,7 +5,7 @@ import java.io.IOException;
 public class s3HealthPlugin extends Plugin
 {
 	private String name = "s3HealthPlugin";
-	private String version = "1.15";
+	private String version = "1.16";
 	
 	
 	static boolean pvp = false;
