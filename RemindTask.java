@@ -74,19 +74,28 @@ class RemindTask extends TimerTask
 				} else {
 					if (id4 == 8 || id4 == 9)
 					{
-						if (parent.getPlayerHP(p) > 1)
+						if (parent.getPlayerOxygen(p) > 1)
 						{
-							parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 1));
-							p.sendMessage("You are drowning! (HP: " + parent.getPlayerHP(p) + ")");
+							parent.setPlayerOxygen(p, Integer.valueOf(parent.getPlayerOxygen(p) - 1));
+							p.sendMessage("Oxygen: " + parent.getPlayerOxygen(p) + ")");
 						} else {
-							parent.DoPlayerDeath(p);
+							if (parent.getPlayerHP(p) > 1)
+							{
+								parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 1));
+								p.sendMessage("You are drowning! HP: " + parent.getPlayerHP(p) + ")");
+							} else {
+								parent.DoPlayerDeath(p);
+							}
+						}
+					} else {
+						if (parent.getPlayerOxygen(p) < 10)
+						{
+							parent.setPlayerOxygen(p, 10);
+							p.sendMessage("Oxygen: " + parent.getPlayerOxygen(p) + ")");
 						}
 					}
 				}
-
 			}
-
-
 
 			for (Mob m : etc.getServer().getMobList()) {
 				if (m == null)

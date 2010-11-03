@@ -20,6 +20,7 @@ public class s3HealthListener extends PluginListener
 		public int hp;
 		public int exp = 0;
 		public int melee = 1;
+		public int oxygen = 10;
 		// Combat Log on by default
 		//public int combatlog = 1;
 
@@ -167,13 +168,15 @@ public class s3HealthListener extends PluginListener
 					int curexp = Integer.parseInt(params[1]);
 					// melee					
 					int curmelee = Integer.parseInt(params[2]);
+					// oxygen
+					int curoxygen = Integer.parseInt(params[3]);
 
 					p1 curplayer = new p1(tokens[0], curhp);
 					curplayer.exp = curexp;
 					curplayer.melee = curmelee;
-					
+					curplayer.oxygen = curoxygen;
 					this.playerList.add(curplayer);
-					System.out.println(getDateTime() + " [DEBUG] new player: " + curplayer.name + " added with: " + curplayer.hp + ":" + curplayer.exp + ":" + curplayer.melee);
+					System.out.println(getDateTime() + " [DEBUG] new player: " + curplayer.name + " added with: " + curplayer.hp + ":" + curplayer.exp + ":" + curplayer.melee + ":" + curplayer.oxygen);
 					
 					
 				}
@@ -297,7 +300,27 @@ public class s3HealthListener extends PluginListener
 		}
 		return 0;
 	}
+	
+	public int getPlayerOxygen(Player player)
+	{
+		for (int i = 0; i < this.playerList.size(); i++) {
+			if (this.playerList.get(i).name.equals(player.getName()) == true)
+			{
+				return this.playerList.get(i).oxygen;
+			}
+		}
+		return 0;
+	}
 
+	public void setPlayerOxygen(Player player, Integer newoxygen)
+	{
+		for (int i = 0; i < this.playerList.size(); i++) {
+			if (this.playerList.get(i).name.equals(player.getName()) == true)
+			{
+				this.playerList.get(i).oxygen = newoxygen;
+			}
+		}
+	}
 
 	public boolean onCommand(Player player, String[] split)
 	{

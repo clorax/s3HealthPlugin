@@ -2,13 +2,18 @@ STILL TO DO:
 	* fix food so it works every time
 	* add food poisoning
 	* add falling damage
+	* add armor
 	* make lava damage recurrent for 15 seconds or until water is applied
-	* add drowning
 	* add suffocation by sand, gravel, foliage
 	* fix Creepers
 	* possibly more?
 
 CHANGELOG:
+
+version 1.17:
+	* Added oxygen counter and drowning
+	* Fixed coordinate detection for lava damage
+	* Expanded lava detection to full player body
 
 version 1.16:
 	* Added lava damage (sort of)
