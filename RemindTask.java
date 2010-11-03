@@ -1,7 +1,7 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.ConcurrentModificationException;
-import java.util.Date;
+//import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -58,18 +58,35 @@ class RemindTask extends TimerTask
 
 			for (Player p : etc.getServer().getPlayerList()) {
 				Location l = p.getLocation();
-				int id = etc.getServer().getBlockIdAt((int)l.x, (int)l.y, (int)(l.z)-1);
-				if (id == 10 || id == 11)
+				int id = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y)-1, (int)l.z);
+				int id2 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y), (int)l.z);
+				int id3 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y)+1, (int)l.z);
+				int id4 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y)+2, (int)l.z);
+				if (id == 10 || id == 11 || id2 == 10 || id2 == 11 || id3 == 10 || id3 == 11 || id4 == 11 || id4 == 10)
 				{
 					if (parent.getPlayerHP(p) > 2)
 					{
 						parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 2));
-						p.sendMessage("The lava burns you! (HP: " + parent.getPlayerHP(p));
+						p.sendMessage("The lava burns you! (HP: " + parent.getPlayerHP(p) + ")");
 					} else {
 						parent.DoPlayerDeath(p);
 					}
+				} else {
+					if (id4 == 8 || id4 == 9)
+					{
+						if (parent.getPlayerHP(p) > 1)
+						{
+							parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 1));
+							p.sendMessage("You are drowning! (HP: " + parent.getPlayerHP(p) + ")");
+						} else {
+							parent.DoPlayerDeath(p);
+						}
+					}
 				}
+
 			}
+
+
 
 			for (Mob m : etc.getServer().getMobList()) {
 				if (m == null)
