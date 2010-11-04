@@ -31,7 +31,7 @@ class RemindTask extends TimerTask
 				{
 					// do nothing
 				} else {
-					p.sendMessage("You were hit by a " + m.getName() + " for " + thisdmg + " damage! (HP: 0)");
+					p.sendMessage("You have been slain by a " + m.getName() + "! (HP: 0)");
 	
 					// reset hp and warp to spawn
 					parent.DoPlayerDeath(p);
@@ -69,6 +69,7 @@ class RemindTask extends TimerTask
 						parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 2));
 						p.sendMessage("The lava burns you! (HP: " + parent.getPlayerHP(p) + ")");
 					} else {
+						p.sendMessage("You have burned to death! (HP: 0)");
 						parent.DoPlayerDeath(p);
 					}
 				} else {
@@ -84,6 +85,7 @@ class RemindTask extends TimerTask
 								parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 1));
 								p.sendMessage("You are drowning! HP: " + parent.getPlayerHP(p) + ")");
 							} else {
+								p.sendMessage("You have drowned! (HP: 0)");
 								parent.DoPlayerDeath(p);
 							}
 						}

@@ -42,6 +42,7 @@ public class s3HealthPlugin extends Plugin
 	public void enable()
 	{
 		log.info(this.name + " " + this.version + " enabled");
+		etc.getInstance().addCommand("/rotation", "- Shows your current rotation.");
 		etc.getInstance().addCommand("/health", "- Shows your current health.");
 		etc.getInstance().addCommand("/hp", "- Shows your current health.");
 		etc.getInstance().addCommand("/pvpenable", "- Enable PVP");
@@ -98,6 +99,8 @@ public class s3HealthPlugin extends Plugin
 	public void disable()
 	{
 		etc.getInstance().removeCommand("/health");
+		etc.getInstance().removeCommand("/hp");
+		etc.getInstance().removeCommand("/rotation");
 		etc.getInstance().removeCommand("/pvpenable");
 		etc.getInstance().removeCommand("/pvpdisable");
 		etc.getInstance().removeCommand("/heal");
@@ -109,6 +112,7 @@ public class s3HealthPlugin extends Plugin
 		etc.getLoader().addListener(PluginLoader.Hook.ARM_SWING, listener, this, PluginListener.Priority.MEDIUM);
 		etc.getLoader().addListener(PluginLoader.Hook.LOGIN, listener, this, PluginListener.Priority.MEDIUM);
 		etc.getLoader().addListener(PluginLoader.Hook.COMMAND, listener, this, PluginListener.Priority.MEDIUM);
+		etc.getLoader().addListener(PluginLoader.Hook.BLOCK_DESTROYED, listener, this, PluginListener.Priority.MEDIUM);
 		etc.getLoader().addListener(PluginLoader.Hook.BLOCK_CREATED, listener, this, PluginListener.Priority.MEDIUM);
 		etc.getLoader().addListener(PluginLoader.Hook.DISCONNECT, listener, this, PluginListener.Priority.MEDIUM);
 	}

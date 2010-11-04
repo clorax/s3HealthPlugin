@@ -98,32 +98,32 @@ public class s3HealthListener extends PluginListener
 	
 	public boolean onBlockCreate(Player player, Block BlockPlaced, Block blockClicked, int itemInHand)
 	{
-		if (player.getItemInHand() == 319)
+		if (itemInHand == 319)
 		{
 			setPlayerHP(player, getPlayerHP(player) + 2);
 			player.sendMessage("HP:" + getPlayerHP(player));
 		} else {
-			if (player.getItemInHand() == 320)
+			if (itemInHand == 320)
 			{
 				setPlayerHP(player, getPlayerHP(player) + 4);
 				player.sendMessage("HP:" + getPlayerHP(player));
 			} else {
-				if (player.getItemInHand() == 297)
+				if (itemInHand == 297)
 				{
 					setPlayerHP(player, getPlayerHP(player) + 3);
 					player.sendMessage("HP:" + getPlayerHP(player));
 				} else {
-					if (player.getItemInHand() == 260)
+					if (itemInHand == 260)
 					{
 						setPlayerHP(player, getPlayerHP(player) + 2);
 						player.sendMessage("HP:" + getPlayerHP(player));
 					} else {
-						if (player.getItemInHand() == 282)
+						if (itemInHand == 282)
 						{
 							setPlayerHP(player, getPlayerHP(player) + 5);
 							player.sendMessage("HP:" + getPlayerHP(player));
 						} else {
-							if (player.getItemInHand() == 322)
+							if (itemInHand == 322)
 							{
 								setPlayerHP(player, getPlayerHP(player) + 10);
 								player.sendMessage("HP:" + getPlayerHP(player));
@@ -232,7 +232,7 @@ public class s3HealthListener extends PluginListener
 		// into the configPlayers file
 		PropertiesFile configPlayers = new PropertiesFile("s3HealthPlugin.txt");
 		for (int i = 0; i < this.playerList.size(); i++) {
-			String playerData = this.playerList.get(i).hp + ":" + this.playerList.get(i).exp + ":" + this.playerList.get(i).melee;
+			String playerData = this.playerList.get(i).hp + ":" + this.playerList.get(i).exp + ":" + this.playerList.get(i).melee + ":" + this.playerList.get(i).oxygen;
 			configPlayers.setString(this.playerList.get(i).name, playerData);
 		}
 		//configPlayers.close();
@@ -343,14 +343,14 @@ public class s3HealthListener extends PluginListener
           pvp = true; // false = Disabled, true = Enabled
           player.sendMessage("PVP Enabled");
           return true;
-       }
+		}
 
 		if(split[0].equalsIgnoreCase("/pvpdisable") && player.canUseCommand("/pvpdisable"))
         {
           pvp = false; //false = Disabled, true = Enabled
           player.sendMessage("PVP Disabled");
           return true;
-      }
+		}
 
 		if(split[0].equalsIgnoreCase("/heal") && player.canUseCommand("/heal"))
 		{
@@ -358,7 +358,12 @@ public class s3HealthListener extends PluginListener
 			player.sendMessage("You have been fully healed. HP:" + getPlayerHP(player));
 			return true;
 		}
-
+		
+		if(split[0].equalsIgnoreCase("/rotation") && player.canUseCommand("/rotation"))
+		{
+			player.sendMessage(String.valueOf(player.getRotation() % 360));
+			return true;
+		}
 		return false;
 	}
 	
@@ -460,7 +465,7 @@ public class s3HealthListener extends PluginListener
 	public void DoPlayerDeath(Player player)
 	{
 	      // slain
-	      player.sendMessage("You have been slain");
+	      //player.sendMessage("You have been slain");
 	      
 	      if (dropinventory == true )
 	      {
@@ -516,109 +521,84 @@ public class s3HealthListener extends PluginListener
 	{
 		// in case there is no item found, use the base damage for a 'fashioned weapon' (ie brick etc) (3)
 		int itembasedamage = basedamage;
-		// WOODEN ITEMS
 		if (itemId == 268)
 		{
-			// Wooden Sword
 			itembasedamage = woodensword;
 		}
 		if (itemId == 269)
 		{
-			// Wooden Spade
 			itembasedamage = woodenspade;
 		}
 		if (itemId == 270)
 		{
-			// Wooden Pickaxe
 			itembasedamage = woodenpickaxe;
 		}
 		if (itemId == 271)
 		{
-			// Wooden Axe
 			itembasedamage = woodenaxe;
 		}
-		// STONE ITEMS
 		if (itemId == 272)
 		{
-			// Stone Sword
 			itembasedamage = stonesword;
 		}
 		if (itemId == 273)
 		{
-			// Stone Spade
 			itembasedamage = stonespade;
 		}
 		if (itemId == 274)
 		{
-			// Stone Pickaxe
 			itembasedamage = stonepickaxe;
 		}
 		if (itemId == 275)
 		{
-			// Stone Axe
 			itembasedamage = stoneaxe;
 		}
-		// DIAMOND ITEMS
 		if (itemId == 276)
 		{
-			// Diamond Sword
 			itembasedamage = diamondsword;
 		}
 		if (itemId == 277)
 		{
-			// Diamond Spade
 			itembasedamage = diamondspade;
 		}
 		if (itemId == 278)
 		{
-			// Diamond Pickaxe
 			itembasedamage = diamondpickaxe;
 		}
 		if (itemId == 279)
 		{
-			// Diamond Axe
 			itembasedamage = diamondaxe;
 		}
-		// IRON ITEMS
 		if (itemId == 267)
 		{
-			// Iron Sword
 			itembasedamage = ironsword;
 		}
 		if (itemId == 256)
 		{
-			// Iron Spade
 			itembasedamage = ironspade;
 		}
 		if (itemId == 257)
 		{
-			// Iron Pickaxe
 			itembasedamage = ironpickaxe;
 		}
 		if (itemId == 258)
 		{
-			// Iron Axe
 			itembasedamage = ironaxe;
 		}
-		// GOLD ITEMS
 		if (itemId == 283)
 		{
-			// Gold Sword
 			itembasedamage = goldsword;
 		}
 		if (itemId == 284)
 		{
-			// Gold Spade
 			itembasedamage = goldspade;
 		}
 		if (itemId == 285)
 		{
-			// Gold Pickaxe
 			itembasedamage = goldpickaxe;
 		}
 		if (itemId == 286)
 		{
-			// Gold Axe
 			itembasedamage = goldaxe;
 		}
 		return itembasedamage;
@@ -643,6 +623,22 @@ public class s3HealthListener extends PluginListener
 
 		return index;
 	}
+	
+	public boolean onBlockDestroy(Player player, Block block)
+	{
+		if (block.getType() == 81 && player.getItemInHand() == -1)
+		{
+			if (getPlayerHP(player) < 2)
+			{
+				player.sendMessage("You commit suicide by cactus! (HP: 0)");
+				DoPlayerDeath(player);
+			} else {
+				setPlayerHP(player, getPlayerHP(player) - 1);
+				player.sendMessage("You hurt yourself punching a cactus! (HP: " + getPlayerHP(player) + ")");
+			}
+		}
+		return false;
+	}
 
 	public void onArmSwing(Player player)
 	{
@@ -653,6 +649,25 @@ public class s3HealthListener extends PluginListener
 			if (p != null) {
 				if (p.getName().equals(player.getName()) == true)
 				{
+				//	if (player.getItemInHand() == -1) 
+				//	{
+
+						//Location l = player.getLocation();
+						//int id = etc.getServer().getBlockIdAt((int)l.x, (int)l.y, (int)(l.z) + 1);
+						//int id2 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y) + 1, (int)(l.z) + 1);
+						//int id3 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y) + 2, (int)(l.z) + 1);
+						//if (id == 81 || id2 == 81 || id3 == 81)
+						//{
+						//	if(getPlayerHP(player) < 2)
+						//	{
+						//		player.sendMessage("You have committed suicide by cactus! (HP: 0)");
+						//		DoPlayerDeath(player);
+						//	} else {
+						//		setPlayerHP(player, getPlayerHP(player) - 1);
+						//		player.sendMessage("You hurt yourself punching a cactus! (HP: " + getPlayerHP(player) + ")");
+						//	}
+						//}
+				//	}
 				} else {
 					if (pvp == true)
 					{
@@ -727,8 +742,6 @@ public class s3HealthListener extends PluginListener
 							if (m.getHealth() <= thisdmg)
 							{
 								player.sendMessage("You have slain a " + m.getName() + "!");
-								//m.setHealth(0);
-								
 								if (m.getName().equals("Zombie") == true)
 								{
 									GiveExperience(player,80);
