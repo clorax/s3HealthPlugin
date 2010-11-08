@@ -90,9 +90,9 @@ class RemindTask extends TimerTask
 							}
 						}
 					} else {
-						if (parent.getPlayerOxygen(p) < 10)
+						if (parent.getPlayerOxygen(p) < 15)
 						{
-							parent.setPlayerOxygen(p, 10);
+							parent.setPlayerOxygen(p, 15);
 							p.sendMessage("Oxygen: " + parent.getPlayerOxygen(p) + ")");
 						}
 					}

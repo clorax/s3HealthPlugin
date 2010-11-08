@@ -20,7 +20,7 @@ public class s3HealthListener extends PluginListener
 		public int hp;
 		public int exp = 0;
 		public int melee = 1;
-		public int oxygen = 10;
+		public int oxygen = 15;
 		// Combat Log on by default
 		//public int combatlog = 1;
 
@@ -649,30 +649,11 @@ public class s3HealthListener extends PluginListener
 			if (p != null) {
 				if (p.getName().equals(player.getName()) == true)
 				{
-				//	if (player.getItemInHand() == -1) 
-				//	{
-
-						//Location l = player.getLocation();
-						//int id = etc.getServer().getBlockIdAt((int)l.x, (int)l.y, (int)(l.z) + 1);
-						//int id2 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y) + 1, (int)(l.z) + 1);
-						//int id3 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y) + 2, (int)(l.z) + 1);
-						//if (id == 81 || id2 == 81 || id3 == 81)
-						//{
-						//	if(getPlayerHP(player) < 2)
-						//	{
-						//		player.sendMessage("You have committed suicide by cactus! (HP: 0)");
-						//		DoPlayerDeath(player);
-						//	} else {
-						//		setPlayerHP(player, getPlayerHP(player) - 1);
-						//		player.sendMessage("You hurt yourself punching a cactus! (HP: " + getPlayerHP(player) + ")");
-						//	}
-						//}
-				//	}
 				} else {
 					if (pvp == true)
 					{
 						double dist = getPlayerDistance(player, p);
-						if (dist <= 2.5D)
+						if (dist <= 3D)
 						{
 							if (PlayerHasHit(player) == 0)
 							{ 
@@ -714,7 +695,7 @@ public class s3HealthListener extends PluginListener
 			if (m != null) {
 				double dist = getDistance(player, m);
 
-				if (dist < 2.5D)
+				if (dist < 3D)
 				{
 					if (PlayerHasHit(player) == 0)
 					{

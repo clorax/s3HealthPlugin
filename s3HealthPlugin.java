@@ -10,7 +10,7 @@ public class s3HealthPlugin extends Plugin
 	
 	static boolean pvp = false;
 	static boolean dropinventory = true;
-	static int Combattimer = 700;
+	static int Combattimer = 1000;
 	static int woodensword = 2;
 	static int stonesword = 3;
 	static int ironsword = 4;
@@ -60,7 +60,7 @@ public class s3HealthPlugin extends Plugin
 		try {
 			pvp = properties.getBoolean("pvp", false);
 			dropinventory = properties.getBoolean("drop-inventory", true);
-			Combattimer = properties.getInt("combat-timer", 700);
+			Combattimer = properties.getInt("combat-timer", 1000);
 			woodensword = properties.getInt("wooden-sword", 2);
 			stonesword = properties.getInt("stone-sword", 3);
 			ironsword = properties.getInt("iron-sword", 3);
