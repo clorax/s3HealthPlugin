@@ -62,43 +62,65 @@ class RemindTask extends TimerTask
 				int id2 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y), (int)l.z);
 				int id3 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y)+1, (int)l.z);
 				int id4 = etc.getServer().getBlockIdAt((int)l.x, (int)(l.y)+2, (int)l.z);
+				if (parent.getPlayerOnFire(p) > 0)
+				{
+					if(parent.getPlayerHP(p) > 1)
+					{
+						parent.setPlayerOnFire(p, parent.getPlayerOnFire(p) - 1);
+						parent.setPlayerHP(p, parent.getPlayerHP(p) - 1);
+						p.sendMessage("You are on fire! (HP: " + parent.getPlayerHP(p) + ")");
+					} else {
+						parent.setPlayerOnFire(p, 0);
+						p.sendMessage("You have burned to death! (HP: 0)");
+						parent.DoPlayerDeath(p);
+					}
+				}
 				if (id == 10 || id == 11 || id2 == 10 || id2 == 11 || id3 == 10 || id3 == 11 || id4 == 11 || id4 == 10)
 				{
 					if (parent.getPlayerHP(p) > 2)
 					{
 						parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 2));
 						p.sendMessage("The lava burns you! (HP: " + parent.getPlayerHP(p) + ")");
+						if (parent.getPlayerOnFire(p) < 1)
+						{
+							parent.setPlayerOnFire(p, 15);
+						}
 					} else {
 						p.sendMessage("You have burned to death! (HP: 0)");
 						parent.DoPlayerDeath(p);
 					}
 				} else {
-					if (id4 == 8 || id4 == 9)
+					if (parent.getPlayerOnFire(p) > 0 && (id == 8 || id == 9 || id2 == 8 || id2 == 9 || id3 == 8 ||id3 == 9))
 					{
-						if (parent.getPlayerOxygen(p) > 1)
-						{
-							parent.setPlayerOxygen(p, Integer.valueOf(parent.getPlayerOxygen(p) - 1));
-							p.sendMessage("Oxygen: " + parent.getPlayerOxygen(p) + ")");
-						} else {
-							if (parent.getPlayerHP(p) > 1)
-							{
-								parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 1));
-								p.sendMessage("You are drowning! HP: " + parent.getPlayerHP(p) + ")");
-							} else {
-								p.sendMessage("You have drowned! (HP: 0)");
-								parent.DoPlayerDeath(p);
-							}
-						}
+						parent.setPlayerOnFire(p, 0);
 					} else {
-						if (parent.getPlayerOxygen(p) < 15)
+						if (id4 == 8 || id4 == 9)
 						{
-							parent.setPlayerOxygen(p, 15);
-							p.sendMessage("Oxygen: " + parent.getPlayerOxygen(p) + ")");
+							if (parent.getPlayerOxygen(p) > 1)
+							{
+								parent.setPlayerOxygen(p, Integer.valueOf(parent.getPlayerOxygen(p) - 1));
+								p.sendMessage("Oxygen: " + parent.getPlayerOxygen(p) + ")");
+							} else {
+								if (parent.getPlayerHP(p) > 1)
+								{
+									parent.setPlayerHP(p, Integer.valueOf(parent.getPlayerHP(p) - 1));
+									p.sendMessage("You are drowning! HP: " + parent.getPlayerHP(p) + ")");
+								} else {
+									p.sendMessage("You have drowned! (HP: 0)");
+									parent.DoPlayerDeath(p);
+								}
+							}
+						} else {
+							if (parent.getPlayerOxygen(p) < 15)
+							{
+								parent.setPlayerOxygen(p, 15);
+								p.sendMessage("Oxygen: " + parent.getPlayerOxygen(p) + ")");
+							}
 						}
 					}
 				}
 			}
-
+			
 			for (Mob m : etc.getServer().getMobList()) {
 				if (m == null)
 					continue;

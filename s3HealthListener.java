@@ -21,6 +21,7 @@ public class s3HealthListener extends PluginListener
 		public int exp = 0;
 		public int melee = 1;
 		public int oxygen = 15;
+		public int onfire = 0;
 		// Combat Log on by default
 		//public int combatlog = 1;
 
@@ -170,13 +171,14 @@ public class s3HealthListener extends PluginListener
 					int curmelee = Integer.parseInt(params[2]);
 					// oxygen
 					int curoxygen = Integer.parseInt(params[3]);
-
+					int curonfire = Integer.parseInt(params[4]);
 					p1 curplayer = new p1(tokens[0], curhp);
 					curplayer.exp = curexp;
 					curplayer.melee = curmelee;
 					curplayer.oxygen = curoxygen;
+					curplayer.onfire = curonfire;
 					this.playerList.add(curplayer);
-					System.out.println(getDateTime() + " [DEBUG] new player: " + curplayer.name + " added with: " + curplayer.hp + ":" + curplayer.exp + ":" + curplayer.melee + ":" + curplayer.oxygen);
+					System.out.println(getDateTime() + " [DEBUG] new player: " + curplayer.name + " added with: " + curplayer.hp + ":" + curplayer.exp + ":" + curplayer.melee + ":" + curplayer.oxygen + ":" + curplayer.onfire);
 					
 					
 				}
@@ -232,7 +234,7 @@ public class s3HealthListener extends PluginListener
 		// into the configPlayers file
 		PropertiesFile configPlayers = new PropertiesFile("s3HealthPlugin.txt");
 		for (int i = 0; i < this.playerList.size(); i++) {
-			String playerData = this.playerList.get(i).hp + ":" + this.playerList.get(i).exp + ":" + this.playerList.get(i).melee + ":" + this.playerList.get(i).oxygen;
+			String playerData = this.playerList.get(i).hp + ":" + this.playerList.get(i).exp + ":" + this.playerList.get(i).melee + ":" + this.playerList.get(i).oxygen + ":" + this.playerList.get(i).onfire;
 			configPlayers.setString(this.playerList.get(i).name, playerData);
 		}
 		//configPlayers.close();
@@ -272,6 +274,27 @@ public class s3HealthListener extends PluginListener
 			}
 		}
 		return 0;
+	}
+
+	public int getPlayerOnFire(Player player)
+	{
+		for (int i = 0; i < this.playerList.size(); i++) {
+			if (this.playerList.get(i).name.equals(player.getName()) == true)
+			{
+				return this.playerList.get(i).onfire;
+			}
+		}
+		return 0;
+	}
+
+	public void setPlayerOnFire(Player player, Integer newfire)
+	{
+		for (int i = 0;i < this.playerList.size(); i++) {
+			if (this.playerList.get(i).name.equals(player.getName()) == true)
+			{
+				this.playerList.get(i).onfire = newfire;
+			}
+		}
 	}
 
 	public void setPlayerHP(Player player, Integer newhp)
