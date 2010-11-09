@@ -86,6 +86,7 @@ class RemindTask extends TimerTask
 							parent.setPlayerOnFire(p, 15);
 						}
 					} else {
+						parent.setPlayerOnFire(p, 0);
 						p.sendMessage("You have burned to death! (HP: 0)");
 						parent.DoPlayerDeath(p);
 					}
